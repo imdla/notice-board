@@ -17,6 +17,10 @@ public class AuthService {
             throw new IllegalArgumentException("이미 사용 중인 아이디입니다.");
         }
 
+        if (userRepository.existsByEmail(requestDto.getEmail())) {
+            throw new IllegalArgumentException("이미 사용 중인 이메일입니다.");
+        }
+
 
 
         requestDto.toEntity();
