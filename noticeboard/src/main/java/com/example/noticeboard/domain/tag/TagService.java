@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -17,5 +19,11 @@ public class TagService {
         return TagResponseDto.from(
                 tagRepository.save(requestDto.toEntity())
         );
+    }
+
+    public List<TagResponseDto> getTags() {
+        return tagRepository.findAll().stream()
+                .map(TagResponseDto::from)
+                .toList();
     }
 }
