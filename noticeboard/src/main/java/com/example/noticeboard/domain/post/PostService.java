@@ -51,7 +51,6 @@ public class PostService {
     }
 
     public type getPosts(Pageable pageable) {
-        return postRepository.findAll(pageable).getContent()
-                .stream().map(PostListResponseDto::from).toList();
+        return PostListResponseDto.from(postRepository.findAll(pageable));
     }
 }
