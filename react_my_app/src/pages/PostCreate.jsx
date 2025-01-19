@@ -1,24 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
-import postApi from "../api/postsApi";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate, useNavigate } from 'react-router-dom';
+import postApi from '../api/postsApi';
 
 export default function PostCreate() {
   const navigate = useNavigate();
 
   const { isLoggedIn } = useSelector((state) => state.auth);
-  const [formData, setFormData] = useState({ title: "", content: "" });
-  const [error, setError] = useState("");
+  const [formData, setFormData] = useState({
+    title: '',
+    content: '',
+    tags: '',
+  });
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (!isLoggedIn) {
-      navigate("/");
+      navigate('/');
     }
   }, [isLoggedIn]);
 
   function handleFormInput(e) {
     const inputValue = e.target.value;
     const key = e.target.name;
+
     setFormData({
       ...formData,
       [key]: inputValue,
@@ -27,11 +32,30 @@ export default function PostCreate() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setError("");
+    setError('');
 
     async function createPost() {
       try {
         // 게시글 생성 로직
+        const frm = new FormData();
+        if (formData.tags.length > 0) {
+          formData.tags = formData.tags.split(' ');
+        }
+        const datas = {
+          ...formData,
+          tags: formData.tags || [],
+        };
+        frm.append(
+          'data',
+          new Blob([JSON.stringify(datas)], {
+            type: 'application/json',
+          })
+        );
+
+        const response = await postApi.createPost(frm);
+        const data = response.data;
+        const id = data.data.id;
+        navigate(`/posts/${id}`);
       } catch (err) {
         console.log(err);
       }
@@ -59,6 +83,17 @@ export default function PostCreate() {
             name="content"
             required
             value={formData.content}
+            onChange={handleFormInput}
+          ></textarea>
+        </label>
+
+        <label>
+          태그 :
+          <textarea
+            id="tags"
+            name="tags"
+            required
+            value={formData.tags}
             onChange={handleFormInput}
           ></textarea>
         </label>
