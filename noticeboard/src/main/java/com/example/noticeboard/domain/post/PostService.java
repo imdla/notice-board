@@ -50,7 +50,7 @@ public class PostService {
         return PostResponseDto.from(postRepository.save(post));
     }
 
-    public type getPosts(Pageable pageable) {
+    public PostListResponseDto getPosts(Pageable pageable) {
         return PostListResponseDto.from(postRepository.findAll(pageable));
     }
 }
