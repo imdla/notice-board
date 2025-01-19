@@ -5,6 +5,7 @@ import com.example.noticeboard.domain.user.entity.User;
 import com.example.noticeboard.global.entity.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -26,4 +27,11 @@ public class Comment extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id", nullable = false)
     private User author;
+
+    @Builder
+    public Comment (String content, Post post, User author) {
+        this.content = content;
+        this.post = post;
+        this.author = author;
+    }
 }
