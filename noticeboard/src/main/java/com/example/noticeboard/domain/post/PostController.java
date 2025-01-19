@@ -76,4 +76,17 @@ public class PostController {
                         postService.updatePost(postId, requestDto, image, user)
                 ));
     }
+
+    // 게시글 삭제
+    @DeleteMapping("/postId")
+    public void deletePost(
+            @RequestParam Long postId,
+            @AuthenticationPrincipal User user
+    ) {
+        ResponseEntity
+                .status(HttpStatus.NO_CONTENT)
+                .body(ApiResponse.ok(
+                        postService.deletePost(postId, user)
+                ));
+    }
 }
