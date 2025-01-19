@@ -38,6 +38,14 @@ public class PostController {
                 ));
     }
 
+    // 게시글 조회
+    @GetMapping("/{postId}")
+    public type getPostById(@PathVariable String postId) {
+        return ResponseEntity.ok(ApiResponse.ok(
+                postService.getPostById(postId)
+        ));
+    }
+
     // 게시글 조회 (pagination)
     @GetMapping
     public ResponseEntity<ApiResponse<PostListResponseDto>> getPosts(Pageable pageable) {
