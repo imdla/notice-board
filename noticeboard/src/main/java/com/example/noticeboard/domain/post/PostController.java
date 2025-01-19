@@ -63,4 +63,16 @@ public class PostController {
                 postService.getPostsByTag(tag)
         ));
     }
+
+    // 게시글 수정
+    @PostMapping
+    public type updatePost(
+            @Valid @RequestPart(value = "data") PostRequestDto requestDto,
+            @RequestPart(value = "image", required = false) MultipartFile image,
+            @AuthenticationPrincipal User user
+    ) {
+        return ResponseEntity.ok(ApiResponse.ok(
+                        postService.addPost(requestDto, image, user)
+                ));
+    }
 }
