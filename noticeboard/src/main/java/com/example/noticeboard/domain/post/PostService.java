@@ -25,6 +25,7 @@ public class PostService {
     private final FileService fileService;
     private final TagRepository tagRepository;
 
+    // 게시글 작성 (image, tag)
     @Transactional
     public PostResponseDto addPost(PostRequestDto requestDto, MultipartFile image, User user) {
         // 이미지 설정
@@ -50,7 +51,14 @@ public class PostService {
         return PostResponseDto.from(postRepository.save(post));
     }
 
+    // 게시글 조회 (pagination)
     public PostListResponseDto getPosts(Pageable pageable) {
         return PostListResponseDto.from(postRepository.findAll(pageable));
+    }
+
+    // 태그별 게시글 조회
+    public type getPostsByTag(String tag) {
+        return postRepository.findAllByTagName(tag).stream()
+                .map().toList();
     }
 }

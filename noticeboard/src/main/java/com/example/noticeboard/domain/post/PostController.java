@@ -45,9 +45,11 @@ public class PostController {
 
     // 태그별 게시글 조회
     @GetMapping("/tags")
-    public type getPostsByTags() {
+    public type getPostsByTag(
+            @RequestParam String tag
+    ) {
         return ResponseEntity.ok(ApiResponse.ok(
-                postService.getPostsByTags()
+                postService.getPostsByTag(tag)
         ));
     }
 }
