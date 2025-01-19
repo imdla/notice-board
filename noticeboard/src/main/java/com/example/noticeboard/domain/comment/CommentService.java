@@ -25,4 +25,16 @@ public class CommentService {
         Comment comment = requestDto.toEntity(post, author);
         return CommentResponseDto.from(comment);
     }
+
+    @Transactional
+    public type updateComment(Long postId, Long commentId, CommentRequestDto requestDto, User author) {
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(ResourceNotFoundException::new);
+
+        if (!comment.getAuthor().getUsername().equals(author.getUsername())) {
+            throw new IllegalArgumentException("댓글 작성자가 아닙니다.");
+        }
+
+        return CommentResponseDto.from(comment.update(requestDto));
+    }
 }

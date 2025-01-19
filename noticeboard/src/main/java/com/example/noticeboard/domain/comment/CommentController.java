@@ -34,7 +34,7 @@ public class CommentController {
     public type updateComment(
             @PathVariable Long postId,
             @PathVariable Long commentId,
-            @RequestBody CommentRequestDto requestDto,
+            @Valid @RequestBody CommentRequestDto requestDto,
             @AuthenticationPrincipal User author
     ) {
         return ResponseEntity.ok(ApiResponse.ok(
