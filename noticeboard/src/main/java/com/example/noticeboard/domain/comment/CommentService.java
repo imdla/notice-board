@@ -27,7 +27,7 @@ public class CommentService {
     }
 
     @Transactional
-    public type updateComment(Long postId, Long commentId, CommentRequestDto requestDto, User author) {
+    public CommentResponseDto updateComment(Long postId, Long commentId, CommentRequestDto requestDto, User author) {
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(ResourceNotFoundException::new);
 
