@@ -1,8 +1,10 @@
 package com.example.noticeboard.domain.comment;
 
 import com.example.noticeboard.domain.comment.dto.CommentRequestDto;
+import com.example.noticeboard.domain.post.PostRepository;
 import com.example.noticeboard.domain.post.entity.Post;
 import com.example.noticeboard.domain.user.entity.User;
+import com.example.noticeboard.global.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +18,10 @@ public class CommentService {
 
     @Transactional
     public type addComment(Long postId, CommentRequestDto requestDto, User author) {
-        Post post =
+        Post post = postRepository.findById(postId)
+                .orElseThrow(ResourceNotFoundException::new);
+
+        Comment comment = requestDto.toEntity(post, author);
+        return CommentResponseDto.from(comment);
     }
 }
