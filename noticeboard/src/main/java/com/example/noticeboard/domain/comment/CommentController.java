@@ -1,6 +1,7 @@
 package com.example.noticeboard.domain.comment;
 
 import com.example.noticeboard.domain.comment.dto.CommentRequestDto;
+import com.example.noticeboard.domain.comment.dto.CommentResponseDto;
 import com.example.noticeboard.domain.user.entity.User;
 import com.example.noticeboard.global.response.ApiResponse;
 import jakarta.validation.Valid;
@@ -17,7 +18,7 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping
-    public type addComment(
+    public ResponseEntity<ApiResponse<CommentResponseDto>> addComment(
             @PathVariable Long postId,
             @Valid @RequestBody CommentRequestDto requestDto,
             @AuthenticationPrincipal User author
