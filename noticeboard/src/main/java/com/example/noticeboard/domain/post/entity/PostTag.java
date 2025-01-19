@@ -3,6 +3,7 @@ package com.example.noticeboard.domain.post.entity;
 import com.example.noticeboard.domain.tag.Tag;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -30,4 +31,10 @@ public class PostTag {
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdAt;
+
+    @Builder
+    public PostTag(Post post, Tag tag) {
+        this.post = post;
+        this.tag = tag;
+    }
 }

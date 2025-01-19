@@ -38,7 +38,7 @@ public class Post extends BaseTimeEntity {
     private List<Comment> comments = new ArrayList<>();
 
     @BatchSize(size = 100)
-    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PostTag> postTags = new ArrayList<>();
 
     @Builder
