@@ -31,14 +31,14 @@ public class CommentController {
     }
 
     @PutMapping("/{commentId}")
-    public type updateComment(
+    public ResponseEntity<ApiResponse<CommentResponseDto>> updateComment(
             @PathVariable Long postId,
             @PathVariable Long commentId,
             @Valid @RequestBody CommentRequestDto requestDto,
             @AuthenticationPrincipal User author
     ) {
         return ResponseEntity.ok(ApiResponse.ok(
-                commentService.updateComment(postId, commentId, requestDto)
+                commentService.updateComment(postId, commentId, requestDto, author)
         ));
     }
 }
