@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 public class PostTag {
     @Id
@@ -35,6 +35,14 @@ public class PostTag {
     @Builder
     public PostTag(Post post, Tag tag) {
         this.post = post;
+        this.tag = tag;
+    }
+
+    public void addPost(Post post) {
+        this.post = post;
+    }
+
+    public void addTag(Tag tag) {
         this.tag = tag;
     }
 }
