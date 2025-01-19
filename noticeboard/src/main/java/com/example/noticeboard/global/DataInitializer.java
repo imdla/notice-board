@@ -31,7 +31,7 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         initUser();
-        initPost();
+//        initPost();
     }
 
     public User initUser() {
@@ -47,34 +47,34 @@ public class DataInitializer implements CommandLineRunner {
     }
 
 
-    @Transactional
-    public void initPost(){
-        if (postRepository.count() == 0){
-
-            for (int i=1; i<=3; i++) {
-                Post post = Post.builder()
-                        .title("title" + i)
-                        .content("content" + i)
-                        .author(initUser())
-                        .build();
-                postRepository.save(post);
-
-                for (int j=1; j<=2; j++){
-                    Tag tag = Tag.builder().name("tag" + i + j).build();
-                    tagRepository.save(tag);
-
-                    PostTag postTag = new PostTag();
-                    postTag.addPost(post);
-                    postTag.addTag(tag);
-
-                    postTagRepository.save(postTag);
-
-                    Comment comment = Comment.builder()
-                            .content("comment" + i + j)
-                            .post(post).build();
-                    commentRepository.save(comment);
-                }
-            }
-        }
-    }
+//    @Transactional
+//    public void initPost(){
+//        if (postRepository.count() == 0){
+//
+//            for (int i=1; i<=3; i++) {
+//                Post post = Post.builder()
+//                        .title("title" + i)
+//                        .content("content" + i)
+//                        .author(initUser())
+//                        .build();
+//                postRepository.save(post);
+//
+//                for (int j=1; j<=2; j++){
+//                    Tag tag = Tag.builder().name("tag" + i + j).build();
+//                    tagRepository.save(tag);
+//
+//                    PostTag postTag = new PostTag();
+//                    postTag.addPost(post);
+//                    postTag.addTag(tag);
+//
+//                    postTagRepository.save(postTag);
+//
+//                    Comment comment = Comment.builder()
+//                            .content("comment" + i + j)
+//                            .post(post).build();
+//                    commentRepository.save(comment);
+//                }
+//            }
+//        }
+//    }
 }
