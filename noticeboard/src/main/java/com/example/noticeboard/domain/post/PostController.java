@@ -79,14 +79,15 @@ public class PostController {
 
     // 게시글 삭제
     @DeleteMapping("/postId")
-    public void deletePost(
+    public ResponseEntity<ApiResponse<Void>> deletePost(
             @RequestParam Long postId,
             @AuthenticationPrincipal User user
     ) {
-        ResponseEntity
-                .status(HttpStatus.NO_CONTENT)
-                .body(ApiResponse.ok(
-                        postService.deletePost(postId, user)
+        postService.deletePost(postId, user);
+        return ResponseEntity.ok(ApiResponse.ok(
+                "게시글이 성공적으로 삭제되었습니다",
+                        "DELETE",
+                        null
                 ));
     }
 }

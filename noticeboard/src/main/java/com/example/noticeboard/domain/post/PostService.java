@@ -8,6 +8,7 @@ import com.example.noticeboard.domain.post.entity.Post;
 import com.example.noticeboard.domain.post.entity.PostTag;
 import com.example.noticeboard.domain.tag.Tag;
 import com.example.noticeboard.domain.tag.TagRepository;
+import com.example.noticeboard.domain.user.entity.Role;
 import com.example.noticeboard.domain.user.entity.User;
 import com.example.noticeboard.global.common.FileService;
 import com.example.noticeboard.global.exception.ResourceNotFoundException;
@@ -102,5 +103,15 @@ public class PostService {
         }
 
         return PostResponseDto.from(post);
+    }
+
+    @Transactional
+    public void deletePost(Long postId, User user) {
+        Post post = postRepository.findById(postId).orElseThrow(ResourceNotFoundException::new);
+        if (!(post.getAuthor().getUsername().equals(user.getUsername())) || !(user.getRole() == Role.ROLE_ADMIN)) {
+            throw new IllegalArgumentException("게시글을 삭제할 수 없습니다.");
+        }
+
+        postRepository.delete(post);
     }
 }
