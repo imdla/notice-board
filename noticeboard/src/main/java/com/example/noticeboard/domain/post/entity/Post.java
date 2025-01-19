@@ -1,11 +1,13 @@
 package com.example.noticeboard.domain.post.entity;
 
+import com.example.noticeboard.domain.user.entity.User;
 import com.example.noticeboard.global.entity.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Comment;
 
 import java.util.ArrayList;
 import java.util.List;
