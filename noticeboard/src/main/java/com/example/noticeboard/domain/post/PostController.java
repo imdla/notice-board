@@ -1,6 +1,7 @@
 package com.example.noticeboard.domain.post;
 
 import com.example.noticeboard.domain.post.dto.request.PostRequestDto;
+import com.example.noticeboard.domain.post.dto.response.PostListResponseDto;
 import com.example.noticeboard.domain.post.dto.response.PostResponseDto;
 import com.example.noticeboard.domain.user.entity.User;
 import com.example.noticeboard.global.response.ApiResponse;
@@ -34,7 +35,7 @@ public class PostController {
     }
 
     @GetMapping
-    public type getPosts(Pageable pageable) {
+    public ResponseEntity<ApiResponse<PostListResponseDto>> getPosts(Pageable pageable) {
         return ResponseEntity.ok(ApiResponse.ok(
                 postService.getPosts(pageable)
         ));
