@@ -31,7 +31,7 @@ public class PostListResponseDto {
 
     @Getter
     @Builder
-    public class PostItemResponseDto {
+    public static class PostItemResponseDto {
         private final Long id;
         private final String title;
         private final LocalDateTime createdAt;
