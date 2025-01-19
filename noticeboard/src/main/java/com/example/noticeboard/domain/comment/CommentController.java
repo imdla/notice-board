@@ -29,4 +29,16 @@ public class CommentController {
                         commentService.addComment(postId, requestDto, author)
                 ));
     }
+
+    @PutMapping("/{commentId}")
+    public type updateComment(
+            @PathVariable Long postId,
+            @PathVariable Long commentId,
+            @RequestBody CommentRequestDto requestDto,
+            @AuthenticationPrincipal User author
+    ) {
+        return ResponseEntity.ok(ApiResponse.ok(
+                commentService.updateComment(postId, commentId, requestDto)
+        ));
+    }
 }
