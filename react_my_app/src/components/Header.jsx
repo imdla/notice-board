@@ -47,9 +47,6 @@ export default function Header() {
             <li>
               <Link to="/posts/create">게시글 생성(User 없는)</Link>
             </li>
-            <li>
-              <Link to="/posts2/create">게시글 생성(User 있는)</Link>
-            </li>
           </>
         )}
       </ul>

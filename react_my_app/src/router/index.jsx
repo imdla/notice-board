@@ -7,7 +7,6 @@ import RootLayout from "../RootLayout";
 import PostList from "../pages/PostList";
 import PostDetail from "../pages/PostDetail";
 import PostCreate from "../pages/PostCreate";
-import Post2Create from "../pages/Post2Create";
 import NotFound from "../pages/NotFound";
 
 const router = createBrowserRouter([
@@ -39,10 +38,6 @@ const router = createBrowserRouter([
       {
         path: "/posts/create",
         element: <PostCreate />,
-      },
-      {
-        path: "/posts2/create",
-        element: <Post2Create />,
       },
       {
         path: "/posts/:postId",
