@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.List;
+
 @Getter
 @Builder
 @NoArgsConstructor
@@ -21,6 +23,8 @@ public class PostRequestDto {
     @NotBlank(message = "내용은 필수 입력입니다.")
     @Length(min = 5, message = "내용은 5글자 이상 입니다.")
     private String content;
+
+    private List<@NotBlank String> tags;
 
     public Post toEntity(User author) {
         return Post.builder()
