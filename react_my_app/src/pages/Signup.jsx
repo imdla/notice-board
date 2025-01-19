@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import authApi from "../api/authApi";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import authApi from '../api/authApi';
+import { useNavigate } from 'react-router-dom';
 
 export default function SignUp() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
+    username: '',
+    email: '',
+    password: '',
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   const handleFormInput = (e) => {
     const { name, value } = e.target;
@@ -23,16 +23,17 @@ export default function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+    setError('');
     setIsLoading(true);
 
     try {
       await authApi.signup(formData);
-      alert("회원가입 성공");
-      navigate("/");
+      alert('회원가입 성공');
+      navigate('/');
     } catch (err) {
       setError(err.message);
-      console.error(err.response);
+      console.log(err.code);
+      console.log(err);
     } finally {
       setIsLoading(false);
     }
@@ -80,7 +81,7 @@ export default function SignUp() {
 
         {error && <div>{error}</div>}
 
-        <button type="submit">{isLoading ? "처리중..." : "회원가입"}</button>
+        <button type="submit">{isLoading ? '처리중...' : '회원가입'}</button>
       </form>
     </div>
   );
