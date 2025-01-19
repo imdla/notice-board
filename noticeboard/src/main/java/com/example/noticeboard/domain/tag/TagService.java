@@ -13,9 +13,9 @@ public class TagService {
     private TagRepository tagRepository;
 
     @Transactional
-    public type addTag(TagRequestDto requestDto) {
+    public TagResponseDto addTag(TagRequestDto requestDto) {
         return TagResponseDto.from(
-                tagRepository.save(requestDto.toEntity());
+                tagRepository.save(requestDto.toEntity())
         );
     }
 }
