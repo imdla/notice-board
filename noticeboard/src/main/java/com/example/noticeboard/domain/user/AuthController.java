@@ -3,6 +3,7 @@ package com.example.noticeboard.domain.user;
 import com.example.noticeboard.domain.user.dto.request.LoginRequestDto;
 import com.example.noticeboard.domain.user.dto.request.SignupRequestDto;
 import com.example.noticeboard.domain.user.dto.response.SignupResponseDto;
+import com.example.noticeboard.domain.user.dto.response.TokenResponseDto;
 import com.example.noticeboard.global.response.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -31,13 +32,13 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public type login(
+    public ResponseEntity<ApiResponse<TokenResponseDto>> login(
             @Valid @RequestBody LoginRequestDto requestDto
     ) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(ApiResponse.ok(
-                        authService.login()
+                        authService.login(requestDto)
                 ));
     }
 }
