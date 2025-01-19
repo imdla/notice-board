@@ -1,5 +1,6 @@
 package com.example.noticeboard.domain.post.entity;
 
+import com.example.noticeboard.domain.tag.Tag;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

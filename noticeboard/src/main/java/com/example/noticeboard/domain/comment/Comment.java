@@ -15,6 +15,9 @@ public class Comment extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
+    private String content;
+
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
