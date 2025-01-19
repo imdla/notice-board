@@ -105,6 +105,7 @@ public class PostService {
         return PostResponseDto.from(post);
     }
 
+    // 게시글 삭제
     @Transactional
     public void deletePost(Long postId, User user) {
         Post post = postRepository.findById(postId).orElseThrow(ResourceNotFoundException::new);
@@ -114,4 +115,6 @@ public class PostService {
 
         postRepository.delete(post);
     }
+
+
 }

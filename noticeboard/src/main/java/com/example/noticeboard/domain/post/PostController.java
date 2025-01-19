@@ -78,7 +78,7 @@ public class PostController {
     }
 
     // 게시글 삭제
-    @DeleteMapping("/postId")
+    @DeleteMapping("/{postId}")
     public ResponseEntity<ApiResponse<Void>> deletePost(
             @RequestParam Long postId,
             @AuthenticationPrincipal User user
@@ -89,5 +89,15 @@ public class PostController {
                         "DELETE",
                         null
                 ));
+    }
+
+    // 게시글의 댓글 조회
+    @GetMapping("/{postId}/comments")
+    public type getComments(
+            @RequestParam Long postId
+    ) {
+        return ResponseEntity.ok(ApiResponse.ok(
+                postService.getComments(postId)
+        ));
     }
 }
