@@ -1,4 +1,4 @@
-package com.example.noticeboard.domain.user.dto;
+package com.example.noticeboard.domain.user.dto.response;
 
 import com.example.noticeboard.domain.user.entity.Role;
 import com.example.noticeboard.domain.user.entity.User;

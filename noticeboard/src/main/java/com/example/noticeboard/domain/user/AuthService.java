@@ -1,7 +1,7 @@
 package com.example.noticeboard.domain.user;
 
-import com.example.noticeboard.domain.user.dto.SignupRequestDto;
-import com.example.noticeboard.domain.user.dto.SignupResponseDto;
+import com.example.noticeboard.domain.user.dto.request.SignupRequestDto;
+import com.example.noticeboard.domain.user.dto.response.SignupResponseDto;
 import com.example.noticeboard.domain.user.entity.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
