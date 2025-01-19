@@ -1,5 +1,6 @@
 package com.example.noticeboard.domain.post;
 
+import com.example.noticeboard.domain.comment.dto.CommentResponseDto;
 import com.example.noticeboard.domain.post.dto.request.PostRequestDto;
 import com.example.noticeboard.domain.post.dto.response.PostListResponseDto;
 import com.example.noticeboard.domain.post.dto.response.PostResponseDto;
@@ -93,7 +94,7 @@ public class PostController {
 
     // 게시글의 댓글 조회
     @GetMapping("/{postId}/comments")
-    public type getComments(
+    public ResponseEntity<ApiResponse<List<CommentResponseDto>>> getComments(
             @RequestParam Long postId
     ) {
         return ResponseEntity.ok(ApiResponse.ok(
