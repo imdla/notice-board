@@ -1,5 +1,7 @@
 package com.example.noticeboard.domain.post;
 
+import com.example.noticeboard.domain.comment.CommentRepository;
+import com.example.noticeboard.domain.comment.dto.CommentResponseDto;
 import com.example.noticeboard.domain.post.dto.request.PostRequestDto;
 import com.example.noticeboard.domain.post.dto.response.PostListResponseDto;
 import com.example.noticeboard.domain.post.dto.response.PostResponseDto;
@@ -27,6 +29,7 @@ public class PostService {
     private final PostRepository postRepository;
     private final FileService fileService;
     private final TagRepository tagRepository;
+    private final CommentRepository commentRepository;
 
     // 게시글 작성 (image, tag)
     @Transactional
@@ -116,5 +119,9 @@ public class PostService {
         postRepository.delete(post);
     }
 
-
+    // 게시글의 댓글 조회
+    public List<CommentResponseDto> getComments(Long postId) {
+        return commentRepository.findByPostId(postId).stream()
+                .map(CommentResponseDto::from).toList();
+    }
 }
