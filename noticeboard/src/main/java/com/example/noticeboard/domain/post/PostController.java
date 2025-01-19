@@ -66,7 +66,7 @@ public class PostController {
 
     // 게시글 수정
     @PostMapping("/{postId}")
-    public type updatePost(
+    public ResponseEntity<ApiResponse<PostResponseDto>> updatePost(
             @RequestParam Long postId,
             @Valid @RequestPart(value = "data") PostRequestDto requestDto,
             @RequestPart(value = "image", required = false) MultipartFile image,
