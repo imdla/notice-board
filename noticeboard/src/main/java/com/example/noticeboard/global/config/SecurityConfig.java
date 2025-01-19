@@ -1,5 +1,6 @@
 package com.example.noticeboard.global.config;
 
+import com.example.noticeboard.global.security.handler.CustomAccessDeniedHandler;
 import com.example.noticeboard.global.security.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
