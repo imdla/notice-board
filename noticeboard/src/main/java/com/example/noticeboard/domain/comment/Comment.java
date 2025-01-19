@@ -1,5 +1,6 @@
 package com.example.noticeboard.domain.comment;
 
+import com.example.noticeboard.domain.comment.dto.CommentRequestDto;
 import com.example.noticeboard.domain.post.entity.Post;
 import com.example.noticeboard.domain.user.entity.User;
 import com.example.noticeboard.global.entity.BaseTimeEntity;
@@ -33,5 +34,10 @@ public class Comment extends BaseTimeEntity {
         this.content = content;
         this.post = post;
         this.author = author;
+    }
+
+    public Comment update(CommentRequestDto requestDto) {
+        this.content = requestDto.getContent();
+        return this;
     }
 }
