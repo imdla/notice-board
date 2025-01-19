@@ -1,4 +1,4 @@
-package com.example.noticeboard.domain.post.dto;
+package com.example.noticeboard.domain.post.dto.response;
 
 import com.example.noticeboard.domain.post.entity.Post;
 import lombok.Builder;

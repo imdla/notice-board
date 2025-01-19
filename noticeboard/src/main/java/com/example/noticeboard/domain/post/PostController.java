@@ -1,7 +1,7 @@
 package com.example.noticeboard.domain.post;
 
-import com.example.noticeboard.domain.post.dto.PostRequestDto;
-import com.example.noticeboard.domain.post.dto.PostResponseDto;
+import com.example.noticeboard.domain.post.dto.request.PostRequestDto;
+import com.example.noticeboard.domain.post.dto.response.PostResponseDto;
 import com.example.noticeboard.domain.user.entity.User;
 import com.example.noticeboard.global.response.ApiResponse;
 import jakarta.validation.Valid;

@@ -1,7 +1,8 @@
 package com.example.noticeboard.domain.post;
 
-import com.example.noticeboard.domain.post.dto.PostRequestDto;
-import com.example.noticeboard.domain.post.dto.PostResponseDto;
+import com.example.noticeboard.domain.post.dto.request.PostRequestDto;
+import com.example.noticeboard.domain.post.dto.response.PostListResponseDto;
+import com.example.noticeboard.domain.post.dto.response.PostResponseDto;
 import com.example.noticeboard.domain.post.entity.Post;
 import com.example.noticeboard.domain.post.entity.PostTag;
 import com.example.noticeboard.domain.tag.Tag;
