@@ -40,7 +40,7 @@ public class PostController {
 
     // 게시글 조회
     @GetMapping("/{postId}")
-    public type getPostById(@PathVariable String postId) {
+    public type getPostById(@PathVariable Long postId) {
         return ResponseEntity.ok(ApiResponse.ok(
                 postService.getPostById(postId)
         ));

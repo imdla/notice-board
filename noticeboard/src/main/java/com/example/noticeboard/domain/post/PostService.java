@@ -10,6 +10,7 @@ import com.example.noticeboard.domain.tag.Tag;
 import com.example.noticeboard.domain.tag.TagRepository;
 import com.example.noticeboard.domain.user.entity.User;
 import com.example.noticeboard.global.common.FileService;
+import com.example.noticeboard.global.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,13 @@ public class PostService {
         }
 
         return PostResponseDto.from(postRepository.save(post));
+    }
+
+    // 게시글 조회
+    public PostResponseDto getPostById(Long postId) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(ResourceNotFoundException::new);
+        return PostResponseDto.from(post);
     }
 
     // 게시글 조회 (pagination)
