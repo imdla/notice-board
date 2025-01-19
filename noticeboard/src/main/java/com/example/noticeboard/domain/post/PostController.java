@@ -3,6 +3,7 @@ package com.example.noticeboard.domain.post;
 import com.example.noticeboard.domain.post.dto.request.PostRequestDto;
 import com.example.noticeboard.domain.post.dto.response.PostListResponseDto;
 import com.example.noticeboard.domain.post.dto.response.PostResponseDto;
+import com.example.noticeboard.domain.post.dto.response.PostWithTagResponseDto;
 import com.example.noticeboard.domain.user.entity.User;
 import com.example.noticeboard.global.response.ApiResponse;
 import jakarta.validation.Valid;
@@ -13,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 
 @RestController
@@ -45,7 +48,7 @@ public class PostController {
 
     // 태그별 게시글 조회
     @GetMapping("/tags")
-    public type getPostsByTag(
+    public ResponseEntity<ApiResponse<List<PostWithTagResponseDto>>> getPostsByTag(
             @RequestParam String tag
     ) {
         return ResponseEntity.ok(ApiResponse.ok(
