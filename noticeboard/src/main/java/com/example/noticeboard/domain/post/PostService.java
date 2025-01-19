@@ -1,6 +1,7 @@
 package com.example.noticeboard.domain.post;
 
 import com.example.noticeboard.domain.post.dto.PostRequestDto;
+import com.example.noticeboard.domain.post.dto.PostResponseDto;
 import com.example.noticeboard.domain.post.entity.Post;
 import com.example.noticeboard.domain.user.entity.User;
 import com.example.noticeboard.global.common.FileService;
@@ -17,7 +18,7 @@ public class PostService {
     private final FileService fileService;
 
     @Transactional
-    public type addPost(PostRequestDto requestDto, MultipartFile image, User user) {
+    public PostResponseDto addPost(PostRequestDto requestDto, MultipartFile image, User user) {
         String imageUrl = null;
         if (image != null && !image.isEmpty()) {
             imageUrl = fileService.saveFile(image);
