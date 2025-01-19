@@ -3,6 +3,7 @@ package com.example.noticeboard.domain.user;
 import com.example.noticeboard.domain.user.dto.request.LoginRequestDto;
 import com.example.noticeboard.domain.user.dto.request.SignupRequestDto;
 import com.example.noticeboard.domain.user.dto.response.SignupResponseDto;
+import com.example.noticeboard.domain.user.dto.response.TokenResponseDto;
 import com.example.noticeboard.domain.user.entity.User;
 import com.example.noticeboard.global.security.jwt.JwtTokenProvider;
 import lombok.Getter;
@@ -40,7 +41,7 @@ public class AuthService {
         return SignupResponseDto.from(userRepository.save(user));
     }
 
-    public type login(LoginRequestDto requestDto) {
+    public TokenResponseDto login(LoginRequestDto requestDto) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         requestDto.getUsername(),
@@ -49,5 +50,7 @@ public class AuthService {
         );
 
         String jwt = jwtTokenProvider.createToken(authentication);
+
+        return new TokenResponseDto(jwt);
     }
 }
