@@ -1,6 +1,7 @@
 package com.example.noticeboard.domain.comment;
 
 import com.example.noticeboard.domain.comment.dto.CommentRequestDto;
+import com.example.noticeboard.domain.comment.dto.CommentResponseDto;
 import com.example.noticeboard.domain.post.PostRepository;
 import com.example.noticeboard.domain.post.entity.Post;
 import com.example.noticeboard.domain.user.entity.User;
@@ -17,7 +18,7 @@ public class CommentService {
     private final PostRepository postRepository;
 
     @Transactional
-    public type addComment(Long postId, CommentRequestDto requestDto, User author) {
+    public CommentResponseDto addComment(Long postId, CommentRequestDto requestDto, User author) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(ResourceNotFoundException::new);
 
