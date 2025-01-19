@@ -1,5 +1,6 @@
 package com.example.noticeboard.domain.comment;
 
+import com.example.noticeboard.domain.comment.dto.CommentRequestDto;
 import com.example.noticeboard.domain.user.entity.User;
 import com.example.noticeboard.global.response.ApiResponse;
 import jakarta.validation.Valid;
@@ -19,12 +20,12 @@ public class CommentController {
     public type addComment(
             @PathVariable Long postId,
             @Valid @RequestBody CommentRequestDto requestDto,
-            @AuthenticationPrincipal User user
+            @AuthenticationPrincipal User author
     ) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(ApiResponse.ok(
-                        commentService.addComment(postId, requestDto, user)
+                        commentService.addComment(postId, requestDto, author)
                 ));
     }
 }
