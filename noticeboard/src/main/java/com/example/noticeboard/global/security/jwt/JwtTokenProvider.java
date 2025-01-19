@@ -50,5 +50,12 @@ public class JwtTokenProvider {
         }
     }
 
-    
+    public String getUsername(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes()))
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
+    }
 }
