@@ -31,9 +31,7 @@ export default function SignUp() {
       alert('회원가입 성공');
       navigate('/');
     } catch (err) {
-      setError(err.message);
-      console.log(err.code);
-      console.log(err);
+      setError('이미 사용중인 아이디/이메일입니다.');
     } finally {
       setIsLoading(false);
     }

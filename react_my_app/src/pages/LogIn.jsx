@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import authApi from "../api/authApi";
-import { useDispatch } from "react-redux";
-import { login } from "../store/slices/authSlice";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import authApi from '../api/authApi';
+import { useDispatch } from 'react-redux';
+import { login } from '../store/slices/authSlice';
 
 export default function Login() {
   const [formData, setFormData] = useState({
-    username: "",
-    password: "",
+    username: '',
+    password: '',
   });
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -25,14 +25,24 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+    setError('');
     setIsLoading(true);
 
     try {
       // 로그인 로직
+      const response = await authApi.login(formData);
+      const data = response.data;
+
+      const { token } = data.data;
+      dispatch(login(token));
+      navigate('/');
     } catch (err) {
       console.error(err);
-      setError(err.message || "로그인 중 오류가 발생했습니다.");
+      setError(
+        err.message
+          ? '아이디나 비밀번호가 일치하지 않습니다.'
+          : '로그인 중 오류가 발생했습니다.'
+      );
     } finally {
       setIsLoading(false);
     }
@@ -67,7 +77,7 @@ export default function Login() {
 
         {error && <div>{error}</div>}
 
-        <button type="submit">{isLoading ? "처리중..." : "로그인"}</button>
+        <button type="submit">{isLoading ? '처리중...' : '로그인'}</button>
       </form>
     </div>
   );
