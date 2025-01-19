@@ -1,6 +1,7 @@
 package com.example.noticeboard.domain.user;
 
 import com.example.noticeboard.domain.user.dto.SignupRequestDto;
+import com.example.noticeboard.domain.user.dto.SignupResponseDto;
 import com.example.noticeboard.global.response.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/signup")
-    public type signup(
+    public ResponseEntity<ApiResponse<SignupResponseDto>> signup(
             @Valid @RequestBody SignupRequestDto requestDto
     ) {
         return ResponseEntity
