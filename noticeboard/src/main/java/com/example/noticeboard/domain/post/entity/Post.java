@@ -5,6 +5,7 @@ import com.example.noticeboard.domain.user.entity.User;
 import com.example.noticeboard.global.entity.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.BatchSize;
@@ -39,4 +40,11 @@ public class Post extends BaseTimeEntity {
     @BatchSize(size = 100)
     @OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
     private List<PostTag> postTags = new ArrayList<>();
+
+    @Builder
+    public Post(String title, String content, User author) {
+        this.title = title;
+        this.content = content;
+        this.author = author;
+    }
 }
