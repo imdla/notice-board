@@ -1,6 +1,7 @@
 package com.example.noticeboard.domain.post;
 
 import com.example.noticeboard.domain.post.dto.PostRequestDto;
+import com.example.noticeboard.domain.post.dto.PostResponseDto;
 import com.example.noticeboard.domain.user.entity.User;
 import com.example.noticeboard.global.response.ApiResponse;
 import jakarta.validation.Valid;
@@ -18,7 +19,7 @@ public class PostController {
     private final PostService postService;
 
     @PostMapping
-    public type addPost(
+    public ResponseEntity<ApiResponse<PostResponseDto>> addPost(
             @Valid @RequestPart(value = "data") PostRequestDto requestDto,
             @RequestPart(value = "image", required = false) MultipartFile image,
             @AuthenticationPrincipal User user
