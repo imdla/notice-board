@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/tag")
 @RequiredArgsConstructor
@@ -23,7 +25,7 @@ public class TagController {
     }
 
     @GetMapping
-    public type getTags() {
+    public ResponseEntity<ApiResponse<List<TagResponseDto>>> getTags() {
         return ResponseEntity.ok(ApiResponse.ok(
                 tagService.getTags()
         ));
