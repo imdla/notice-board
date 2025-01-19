@@ -2,6 +2,7 @@ package com.example.noticeboard.domain.tag;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -15,4 +16,9 @@ public class Tag {
 
     @Column(nullable = false, unique = false)
     private String name;
+
+    @Builder
+    public Tag(String name) {
+        this.name = name;
+    }
 }
