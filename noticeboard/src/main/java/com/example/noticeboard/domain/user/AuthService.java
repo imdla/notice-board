@@ -4,6 +4,7 @@ import com.example.noticeboard.domain.user.dto.request.LoginRequestDto;
 import com.example.noticeboard.domain.user.dto.request.SignupRequestDto;
 import com.example.noticeboard.domain.user.dto.response.SignupResponseDto;
 import com.example.noticeboard.domain.user.entity.User;
+import com.example.noticeboard.global.security.jwt.JwtTokenProvider;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
