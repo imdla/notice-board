@@ -47,4 +47,8 @@ public class Post extends BaseTimeEntity {
         this.content = content;
         this.author = author;
     }
+
+    public void addImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }
