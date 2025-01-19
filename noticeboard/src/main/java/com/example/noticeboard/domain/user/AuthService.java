@@ -1,10 +1,14 @@
 package com.example.noticeboard.domain.user;
 
+import com.example.noticeboard.domain.user.dto.request.LoginRequestDto;
 import com.example.noticeboard.domain.user.dto.request.SignupRequestDto;
 import com.example.noticeboard.domain.user.dto.response.SignupResponseDto;
 import com.example.noticeboard.domain.user.entity.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenProvider jwtTokenProvider;
 
 
     @Transactional
@@ -31,5 +37,16 @@ public class AuthService {
         User user = requestDto.toEntity(encodedPassword);
 
         return SignupResponseDto.from(userRepository.save(user));
+    }
+
+    public type login(LoginRequestDto requestDto) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        requestDto.getUsername(),
+                        requestDto.getPassword()
+                )
+        );
+
+        String jwt = jwtTokenProvider.createToken(authentication);
     }
 }

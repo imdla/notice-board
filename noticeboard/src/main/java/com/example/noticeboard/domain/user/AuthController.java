@@ -1,5 +1,6 @@
 package com.example.noticeboard.domain.user;
 
+import com.example.noticeboard.domain.user.dto.request.LoginRequestDto;
 import com.example.noticeboard.domain.user.dto.request.SignupRequestDto;
 import com.example.noticeboard.domain.user.dto.response.SignupResponseDto;
 import com.example.noticeboard.global.response.ApiResponse;
