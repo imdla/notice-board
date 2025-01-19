@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class PostController {
     private final PostService postService;
 
+    // 게시글 작성 (image, tag)
     @PostMapping
     public ResponseEntity<ApiResponse<PostResponseDto>> addPost(
             @Valid @RequestPart(value = "data") PostRequestDto requestDto,
@@ -34,10 +35,19 @@ public class PostController {
                 ));
     }
 
+    // 게시글 조회 (pagination)
     @GetMapping
     public ResponseEntity<ApiResponse<PostListResponseDto>> getPosts(Pageable pageable) {
         return ResponseEntity.ok(ApiResponse.ok(
                 postService.getPosts(pageable)
+        ));
+    }
+
+    // 태그별 게시글 조회
+    @GetMapping("/tags")
+    public type getPostsByTags() {
+        return ResponseEntity.ok(ApiResponse.ok(
+                postService.getPostsByTags()
         ));
     }
 }
