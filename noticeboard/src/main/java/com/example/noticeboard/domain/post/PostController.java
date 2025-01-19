@@ -68,7 +68,7 @@ public class PostController {
     // 게시글 수정
     @PostMapping("/{postId}")
     public ResponseEntity<ApiResponse<PostResponseDto>> updatePost(
-            @RequestParam Long postId,
+            @PathVariable Long postId,
             @Valid @RequestPart(value = "data") PostRequestDto requestDto,
             @RequestPart(value = "image", required = false) MultipartFile image,
             @AuthenticationPrincipal User user
@@ -81,7 +81,7 @@ public class PostController {
     // 게시글 삭제
     @DeleteMapping("/{postId}")
     public ResponseEntity<ApiResponse<Void>> deletePost(
-            @RequestParam Long postId,
+            @PathVariable Long postId,
             @AuthenticationPrincipal User user
     ) {
         postService.deletePost(postId, user);
@@ -95,7 +95,7 @@ public class PostController {
     // 게시글의 댓글 조회
     @GetMapping("/{postId}/comments")
     public ResponseEntity<ApiResponse<List<CommentResponseDto>>> getComments(
-            @RequestParam Long postId
+            @PathVariable Long postId
     ) {
         return ResponseEntity.ok(ApiResponse.ok(
                 postService.getComments(postId)
