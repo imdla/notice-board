@@ -6,11 +6,13 @@ import com.example.noticeboard.domain.user.entity.User;
 import com.example.noticeboard.global.response.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 
 @RestController
 @RequestMapping("/posts")
@@ -29,5 +31,12 @@ public class PostController {
                 .body(ApiResponse.ok(
                         postService.addPost(requestDto, image, user)
                 ));
+    }
+
+    @GetMapping
+    public type getPosts(Pageable pageable) {
+        return ResponseEntity.ok(ApiResponse.ok(
+                postService.getPosts(pageable)
+        ));
     }
 }
