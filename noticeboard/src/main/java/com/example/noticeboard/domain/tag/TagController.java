@@ -1,5 +1,6 @@
 package com.example.noticeboard.domain.tag;
 
+import com.example.noticeboard.domain.tag.dto.TagRequestDto;
 import com.example.noticeboard.global.response.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
