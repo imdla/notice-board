@@ -65,14 +65,15 @@ public class PostController {
     }
 
     // 게시글 수정
-    @PostMapping
+    @PostMapping("/{postId}")
     public type updatePost(
+            @RequestParam Long postId,
             @Valid @RequestPart(value = "data") PostRequestDto requestDto,
             @RequestPart(value = "image", required = false) MultipartFile image,
             @AuthenticationPrincipal User user
     ) {
         return ResponseEntity.ok(ApiResponse.ok(
-                        postService.addPost(requestDto, image, user)
+                        postService.updatePost(postId, requestDto, image, user)
                 ));
     }
 }

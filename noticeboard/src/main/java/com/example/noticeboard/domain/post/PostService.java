@@ -70,4 +70,37 @@ public class PostService {
         return postRepository.findAllByTagName(tag).stream()
                 .map(PostWithTagResponseDto::from).toList();
     }
+
+    // 게시글 수정
+    @Transactional
+    public PostResponseDto updatePost(Long postId, PostRequestDto requestDto, MultipartFile image, User user) {
+        Post post = postRepository.findById(postId).orElseThrow(ResourceNotFoundException::new);
+
+        // 작성자 확인
+        if (!post.getAuthor().getUsername().equals(user.getUsername())) {
+            throw new IllegalArgumentException("작성자가 일치하지 않습니다.");
+        }
+
+        post.update(requestDto);
+
+        // 이미지 설정
+        String imageUrl = null;
+        if (image != null && !image.isEmpty()) {
+            imageUrl = fileService.saveFile(image);
+        }
+        post.addImageUrl(imageUrl);
+
+        // tag 설정
+        List<String> tagNames = requestDto.getTags();
+        for (String tagName : tagNames) {
+            Tag tag = tagRepository.findByName(tagName).orElseGet(() -> {
+                Tag newTag = new Tag(tagName);
+                return tagRepository.save(newTag);
+            });
+            PostTag postTag = new PostTag(post, tag);
+            post.getPostTags().add(postTag);
+        }
+
+        return PostResponseDto.from(post);
+    }
 }

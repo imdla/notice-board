@@ -1,6 +1,7 @@
 package com.example.noticeboard.domain.post.entity;
 
 import com.example.noticeboard.domain.comment.Comment;
+import com.example.noticeboard.domain.post.dto.request.PostRequestDto;
 import com.example.noticeboard.domain.user.entity.User;
 import com.example.noticeboard.global.entity.BaseTimeEntity;
 import jakarta.persistence.*;
@@ -50,5 +51,11 @@ public class Post extends BaseTimeEntity {
 
     public void addImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Post update(PostRequestDto requestDto) {
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
+        return this;
     }
 }
