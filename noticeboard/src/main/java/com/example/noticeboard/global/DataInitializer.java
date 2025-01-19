@@ -11,6 +11,7 @@ import com.example.noticeboard.domain.tag.Tag;
 import com.example.noticeboard.domain.tag.TagRepository;
 import com.example.noticeboard.domain.user.AuthService;
 import com.example.noticeboard.domain.user.dto.request.SignupRequestDto;
+import com.example.noticeboard.domain.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -33,7 +34,7 @@ public class DataInitializer implements CommandLineRunner {
         initPost();
     }
 
-    public void initUser() {
+    public User initUser() {
 
         SignupRequestDto requestDto = SignupRequestDto.builder()
                 .username("haha")
@@ -42,6 +43,7 @@ public class DataInitializer implements CommandLineRunner {
                 .build();
 
         authService.signup(requestDto);
+        return null;
     }
 
 
@@ -53,6 +55,7 @@ public class DataInitializer implements CommandLineRunner {
                 Post post = Post.builder()
                         .title("title" + i)
                         .content("content" + i)
+                        .author(initUser())
                         .build();
                 postRepository.save(post);
 

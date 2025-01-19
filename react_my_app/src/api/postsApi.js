@@ -7,9 +7,15 @@ const postApi = {
     return response;
   },
 
-  // 개별 GET, 댓글과 태그들과 함께
+  // GET, 개별 게시글 조회
   getPostById: async (postId) => {
-    const response = await api.get(`${ENDPOINT}/${postId}/detail`);
+    const response = await api.get(`${ENDPOINT}/${postId}`);
+    return response;
+  },
+
+  // GET, 태그별 게시글 조회
+  getPostById: async (tagName) => {
+    const response = await api.get(`${ENDPOINT}/tags?tag=${tagName}`);
     return response;
   },
 
