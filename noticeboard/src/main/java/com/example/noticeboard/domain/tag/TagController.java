@@ -1,6 +1,7 @@
 package com.example.noticeboard.domain.tag;
 
 import com.example.noticeboard.domain.tag.dto.TagRequestDto;
+import com.example.noticeboard.domain.tag.dto.TagResponseDto;
 import com.example.noticeboard.global.response.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ public class TagController {
     private TagService tagService;
 
     @PostMapping
-    public type addTag(@Valid @RequestBody TagRequestDto requestDto) {
+    public ResponseEntity<ApiResponse<TagResponseDto>> addTag(@Valid @RequestBody TagRequestDto requestDto) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(ApiResponse.ok(tagService.addTag(requestDto)));
