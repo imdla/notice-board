@@ -1,16 +1,16 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { login, logout } from "../store/slices/authSlice";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { login, logout } from '../store/slices/authSlice';
 
 export default function Header() {
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { isLoggedIn, user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   return (
     <header>
       <div>
-        Hello user!
+        {isLoggedIn ? `Hello, ${user.name}` : 'Hello, user!'}
         {isLoggedIn ? (
           <>
             <button

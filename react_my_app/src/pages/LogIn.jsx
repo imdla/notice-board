@@ -32,9 +32,10 @@ export default function Login() {
       // 로그인 로직
       const response = await authApi.login(formData);
       const data = response.data;
-
+      
+      const username = formData.username;
       const { token } = data.data;
-      dispatch(login(token));
+      dispatch(login({ token, username }));
       navigate('/');
     } catch (err) {
       console.error(err);
