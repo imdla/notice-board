@@ -23,7 +23,7 @@ public class CommentService {
                 .orElseThrow(ResourceNotFoundException::new);
 
         Comment comment = requestDto.toEntity(post, author);
-        return CommentResponseDto.from(comment);
+        return CommentResponseDto.from(commentRepository.save(comment));
     }
 
     @Transactional
