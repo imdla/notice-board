@@ -1,6 +1,7 @@
 package com.example.noticeboard.global.config;
 
 import com.example.noticeboard.global.security.handler.CustomAccessDeniedHandler;
+import com.example.noticeboard.global.security.handler.JwtAuthenticationEntryPoint;
 import com.example.noticeboard.global.security.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +23,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
+    // 권한이 없는 리소스에 접근
     private final CustomAccessDeniedHandler accessDeniedHandler;
+    // 인증되지 않은 사용자가 보호된 리소스에 접근
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
