@@ -22,7 +22,8 @@ export default function PostCreate() {
   }, [isLoggedIn]);
 
   function handleFormInput(e) {
-    const { key, inputValue } = e.target;
+    const key = e.target.name;
+    const inputValue = e.target.value;
 
     setFormData({
       ...formData,
@@ -30,9 +31,9 @@ export default function PostCreate() {
     });
   }
 
-  function handleFileInput(e) {
-    setImage(e.target.files[0]);
-  }
+  // function handleFileInput(e) {
+  //   setImage(e.target.files[0]);
+  // }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -108,7 +109,7 @@ export default function PostCreate() {
           ></textarea>
         </label>
 
-        <label>
+        {/* <label>
           이미지 :
           <input
             type="file"
@@ -117,7 +118,7 @@ export default function PostCreate() {
             accept="image/png, image/jpg"
             onChange={handleFileInput}
           />
-        </label>
+        </label> */}
 
         <button type="submit">제출</button>
       </form>

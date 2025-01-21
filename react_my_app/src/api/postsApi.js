@@ -3,11 +3,15 @@ const ENDPOINT = '/posts';
 const postApi = {
   // POST, 게시글 작성
   createPost: async (formData) => {
-    const response = await api.post(ENDPOINT, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    });
+    const response = await api.post(ENDPOINT, formData);
     return response;
   },
+  // createPost: async (formData) => {
+  //   const response = await api.post(ENDPOINT, formData, {
+  //     headers: { 'Content-Type': 'multipart/form-data' },
+  //   });
+  //   return response;
+  // },
 
   // GET, 개별 게시글 조회
   getPostById: async (postId) => {
