@@ -31,9 +31,9 @@ export default function PostCreate() {
     });
   }
 
-  // function handleFileInput(e) {
-  //   setImage(e.target.files[0]);
-  // }
+  function handleFileInput(e) {
+    setImage(e.target.files[0]);
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -73,38 +73,33 @@ export default function PostCreate() {
           value={formData.title}
           onChange={handleFormInput}
         />
-        <label>
-          내용 :
-          <textarea
-            id="content"
-            name="content"
-            required
-            value={formData.content}
-            onChange={handleFormInput}
-          ></textarea>
-        </label>
+        <label>내용 :</label>
+        <textarea
+          id="content"
+          name="content"
+          required
+          value={formData.content}
+          onChange={handleFormInput}
+        ></textarea>
 
-        <label>
-          태그(공백으로 구분) :
-          <textarea
-            id="tags"
-            name="tags"
-            required
-            value={formData.tags}
-            onChange={handleFormInput}
-          ></textarea>
-        </label>
+        <label>태그(공백으로 구분) :</label>
+        <textarea
+          id="tags"
+          name="tags"
+          required
+          value={formData.tags}
+          onChange={handleFormInput}
+        ></textarea>
 
-        {/* <label>
-          이미지 :
-          <input
-            type="file"
-            id="image"
-            name="image"
-            accept="image/png, image/jpg"
-            onChange={handleFileInput}
-          />
-        </label> */}
+        {/* 이미지 보낼 때 로딩 */}
+        <label>이미지 :</label>
+        <input
+          type="file"
+          id="image"
+          name="image"
+          accept="image/png, image/jpg"
+          onChange={handleFileInput}
+        />
 
         <button type="submit">제출</button>
       </form>
