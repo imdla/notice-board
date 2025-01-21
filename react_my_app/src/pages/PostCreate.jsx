@@ -10,7 +10,7 @@ export default function PostCreate() {
   const [formData, setFormData] = useState({
     title: '',
     content: '',
-    tags: '',
+    tags: [],
   });
   const [error, setError] = useState('');
 
@@ -21,8 +21,11 @@ export default function PostCreate() {
   }, [isLoggedIn]);
 
   function handleFormInput(e) {
-    const inputValue = e.target.value;
     const key = e.target.name;
+    let inputValue = e.target.value;
+    if (key == 'tags') {
+      inputValue = inputValue.split(' ');
+    }
 
     setFormData({
       ...formData,
@@ -37,22 +40,23 @@ export default function PostCreate() {
     async function createPost() {
       try {
         // 게시글 생성 로직
-        const frm = new FormData();
-        if (formData.tags.length > 0) {
-          formData.tags = formData.tags.split(' ');
-        }
-        const datas = {
-          ...formData,
-          tags: formData.tags || [],
-        };
-        frm.append(
-          'data',
-          new Blob([JSON.stringify(datas)], {
-            type: 'application/json',
-          })
-        );
+        // const frm = new FormData();
+        // if (formData.tags.length > 0) {
+        //   formData.tags = formData.tags.split(' ');
+        // }
+        // const datas = {
+        //   ...formData,
+        //   tags: formData.tags || [],
+        // };
+        // frm.append(
+        //   'data',
+        //   new Blob([JSON.stringify(datas)], {
+        //     type: 'application/json',
+        //   })
+        // );
 
-        const response = await postApi.createPost(frm);
+        // const response = await postApi.createPost(frm);
+        const response = await postApi.createPost(formData);
         const data = response.data;
         const id = data.data.id;
         navigate(`/posts/${id}`);
@@ -96,6 +100,10 @@ export default function PostCreate() {
             value={formData.tags}
             onChange={handleFormInput}
           ></textarea>
+        </label>
+
+        <label>
+          <input type="file" id="image" name="image" />
         </label>
 
         <button>제출</button>

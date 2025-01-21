@@ -31,11 +31,19 @@ export default function SignUp() {
       alert('회원가입 성공');
       navigate('/');
     } catch (err) {
-      setError('이미 사용중인 아이디/이메일입니다.');
+      setError(err.code);
     } finally {
       setIsLoading(false);
     }
   };
+
+  // 400
+  if (error == 'ERR_BAD_REQUEST') {
+    return setError('올바르지 않은 입력 형식입니다.');
+  } // 500
+  else if (error == 'ERR_BAD_RESPONSE') {
+    return setError('이미 사용 중인 아이디/이메일입니다.');
+  }
 
   return (
     <div>

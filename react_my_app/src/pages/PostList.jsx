@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import postApi from '../api/postsApi';
 
 export default function PostList() {
@@ -12,11 +11,14 @@ export default function PostList() {
     async function fetchPosts() {
       // 게시글 조회 로직
       try {
-        const params = '?page=0&size=100';
+        const params = {
+          page: 0,
+          size: 100,
+        };
         const response = await postApi.getPosts(params);
-        const data = response.data;
+        const data = response.data.data.posts;
 
-        setPosts(data.data);
+        setPosts(data);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -39,18 +41,22 @@ export default function PostList() {
     <div>
       <h2>Post List</h2>
       <ul>
-        {posts.map((post) => {
-          const { id, title } = post;
-          return (
-            <li key={id}>
-              <Link to={`/posts/${id}`}>
-                <h3>
-                  {id} : {title}
-                </h3>
-              </Link>
-            </li>
-          );
-        })}
+        {posts.length > 0 ? (
+          posts.map((post) => {
+            const { id, title } = post;
+            return (
+              <li key={id}>
+                <Link to={`/posts/${id}`}>
+                  <h3>
+                    {id}번째 게시글 : {title}
+                  </h3>
+                </Link>
+              </li>
+            );
+          })
+        ) : (
+          <div>게시글이 없습니다.</div>
+        )}
       </ul>
     </div>
   );

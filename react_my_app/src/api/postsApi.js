@@ -16,7 +16,7 @@ const postApi = {
   },
 
   // GET, 게시글 리스트 조회
-  getPosts: async (params = {}) => {
+  getPosts: async (params) => {
     const response = await api.get(ENDPOINT, { params });
     return response;
   },
