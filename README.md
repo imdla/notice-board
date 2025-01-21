@@ -13,5 +13,5 @@
 
 <br />
 
-## Wireframe
-![wireframe.jpg](assets/wireframe.jpg)
+## ERD
+![ERD.jpg](assets/erd.jpg)
