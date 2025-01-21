@@ -41,25 +41,11 @@ export default function PostCreate() {
 
     async function createPost() {
       try {
-        // 게시글 생성 로직
-        // const frm = new FormData();
-        // if (formData.tags.length > 0) {
-        //   formData.tags = formData.tags.split(' ');
-        // }
-        // const datas = {
-        //   ...formData,
-        //   tags: formData.tags || [],
-        // };
-        // frm.append(
-        //   'data',
-        //   new Blob([JSON.stringify(datas)], {
-        //     type: 'application/json',
-        //   })
-        // );
-
-        // const response = await postApi.createPost(frm);
         const formDataObj = new FormData();
-        formDataObj.append('data', JSON.stringify(formData));
+        formDataObj.append(
+          'data',
+          new Blob([JSON.stringify(formData)], { type: 'application/json' })
+        );
         if (image) {
           formDataObj.append('image', image);
         }
