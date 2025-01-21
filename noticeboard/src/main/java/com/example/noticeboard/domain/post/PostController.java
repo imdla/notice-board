@@ -28,7 +28,7 @@ public class PostController {
     // 게시글 작성 (image, tag)
     @PostMapping
     public ResponseEntity<ApiResponse<PostResponseDto>> addPost(
-            @Valid @RequestPart(value = "data") PostRequestDto requestDto,
+           @RequestPart(value = "data") PostRequestDto requestDto,
             @RequestPart(value = "image", required = false) MultipartFile image,
             @AuthenticationPrincipal User user
             ) {

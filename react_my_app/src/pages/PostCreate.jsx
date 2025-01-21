@@ -21,15 +21,11 @@ export default function PostCreate() {
   }, [isLoggedIn]);
 
   function handleFormInput(e) {
-    const key = e.target.name;
-    let inputValue = e.target.value;
-    if (key == 'tags') {
-      inputValue = inputValue.split(' ');
-    }
+    const { key, inputValue } = e.target;
 
     setFormData({
       ...formData,
-      [key]: inputValue,
+      [key]: key === 'tags' ? inputValue.split(' ') : inputValue,
     });
   }
 
@@ -103,7 +99,13 @@ export default function PostCreate() {
         </label>
 
         <label>
-          <input type="file" id="image" name="image" />
+          {/* <input
+            type="file"
+            id="image"
+            name="image"
+            accept="image/png, image/jpg"
+            onChange={handleFormInput}
+          /> */}
         </label>
 
         <button>제출</button>
