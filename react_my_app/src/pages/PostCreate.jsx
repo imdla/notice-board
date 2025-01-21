@@ -57,9 +57,14 @@ export default function PostCreate() {
         // );
 
         // const response = await postApi.createPost(frm);
-        const response = await postApi.createPost(formData);
-        const data = response.data;
-        const id = data.data.id;
+        const formDataObj = new FormData();
+        formDataObj.append('data', JSON.stringify(formData));
+        if (image) {
+          formDataObj.append('image', image);
+        }
+
+        const response = await postApi.createPost(formDataObj);
+        const { id } = response.data.data;
         navigate(`/posts/${id}`);
       } catch (err) {
         console.log(err);
@@ -93,7 +98,7 @@ export default function PostCreate() {
         </label>
 
         <label>
-          태그 :
+          태그(공백으로 구분) :
           <textarea
             id="tags"
             name="tags"
