@@ -12,6 +12,7 @@ export default function PostCreate() {
     content: '',
     tags: [],
   });
+  const [image, setImage] = useState(null);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -27,6 +28,10 @@ export default function PostCreate() {
       ...formData,
       [key]: key === 'tags' ? inputValue.split(' ') : inputValue,
     });
+  }
+
+  function handleFileInput(e) {
+    setImage(e.target.files[0]);
   }
 
   function handleSubmit(e) {
@@ -99,16 +104,17 @@ export default function PostCreate() {
         </label>
 
         <label>
-          {/* <input
+          이미지 :
+          <input
             type="file"
             id="image"
             name="image"
             accept="image/png, image/jpg"
-            onChange={handleFormInput}
-          /> */}
+            onChange={handleFileInput}
+          />
         </label>
 
-        <button>제출</button>
+        <button type="submit">제출</button>
       </form>
     </>
   );
