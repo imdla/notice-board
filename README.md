@@ -14,4 +14,4 @@
 <br />
 
 ## Wireframe
-![wireframe.jpg] (assets/wireframe.jpg)
+![wireframe.jpg](assets/wireframe.jpg)
