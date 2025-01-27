@@ -9,6 +9,7 @@ import com.example.noticeboard.domain.user.entity.User;
 import com.example.noticeboard.global.response.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-
+@Slf4j
 @RestController
 @RequestMapping("/posts")
 @RequiredArgsConstructor
@@ -38,6 +39,7 @@ public class PostController {
                         postService.addPost(requestDto, image, user)
                 ));
     }
+
 
     // 게시글 조회
     @GetMapping("/{postId}")

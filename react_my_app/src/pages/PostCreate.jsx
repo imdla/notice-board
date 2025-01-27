@@ -42,15 +42,21 @@ export default function PostCreate() {
     async function createPost() {
       try {
         const formDataObj = new FormData();
+
         formDataObj.append(
           'data',
           new Blob([JSON.stringify(formData)], { type: 'application/json' })
         );
+
         if (image) {
           formDataObj.append('image', image);
         }
 
-        const response = await postApi.createPost(formDataObj);
+        const response = await postApi.createPost(formDataObj, {
+          headers: {
+            "Content-Type" : "multipart/form-data"
+          }
+        });
         const { id } = response.data.data;
         navigate(`/posts/${id}`);
       } catch (err) {
