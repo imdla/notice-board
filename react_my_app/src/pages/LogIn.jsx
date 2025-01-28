@@ -52,7 +52,7 @@ export default function Login() {
 
   return (
     <div>
-      <h2>회원가입</h2>
+      <h2>로그인</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="username">사용자 이름 : </label>
         <input
