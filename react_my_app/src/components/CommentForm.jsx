@@ -1,24 +1,17 @@
 import React, { useState } from 'react';
 import postApi from '../api/postsApi';
 
-export default function CommentForm({ setPost, postId }) {
+export default function CommentForm({ postId }) {
   const [formData, setFormData] = useState({ content: '' });
 
   function handleSubmit(e) {
-    console.log(postId);
     e.preventDefault();
 
     async function createComment() {
       try {
-        console.log(content);
         const response = await postApi.createComment(postId, formData);
         const data = response.data;
-        setPost((prev) => {
-          return {
-            ...prev,
-            comments: [...prev.comments, data.data],
-          };
-        });
+        console.log(data);
         setFormData({ content: '' });
       } catch (err) {
         console.log(err);
