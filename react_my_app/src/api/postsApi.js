@@ -50,6 +50,12 @@ const postApi = {
     const response = await api.post(`${ENDPOINT}/${postId}/comments`, formData);
     return response;
   },
+
+  // GET, 댓글 조회
+  getComments: async (postId) => {
+    const response = await api.get(`${ENDPOINT}/${postId}/comments`);
+    return response;
+  },
 };
 
 export default postApi;

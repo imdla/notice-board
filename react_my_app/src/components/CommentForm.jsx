@@ -1,32 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import postApi from '../api/postsApi';
 
 export default function CommentForm({ postId }) {
   const [comments, setComments] = useState({});
   const [formData, setFormData] = useState({ content: '' });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    async function fetchPost() {
+      try {
+        const response = await postApi.getComments(postId);
+        setComments(response.data.data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchPost();
+  }, [formData]);
+
+  if (loading) return <div>로딩중...</div>;
+
+  if (error.status == 404) {
+    return <h3>{error}</h3>;
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
-
-    useEffect(() => {
-      async function fetchPost() {
-        try {
-          const response = await postApi.getPostById(postId);
-          setPost(response.data.data);
-        } catch (err) {
-          setError(err.message);
-        } finally {
-          setLoading(false);
-        }
-      }
-      fetchPost();
-    }, []);
 
     async function createComment() {
       try {
         const response = await postApi.createComment(postId, formData);
         const data = response.data;
-        console.log(data);
         setFormData({ content: '' });
       } catch (err) {
         console.log(err);
@@ -49,7 +56,15 @@ export default function CommentForm({ postId }) {
       {comments?.length ? (
         <ol>
           {comments?.map((comment) => {
-            return <li key={`comment-${comment.id}`}>{comment.content}</li>;
+            const { id, content, author, createdAt } = comment;
+            return (
+              <li key={`comment-${id}`}>
+                <p>
+                  {content} <span>{author}</span>{' '}
+                  <span>{createdAt.slice(0, 10)}</span>
+                </p>
+              </li>
+            );
           })}
         </ol>
       ) : (
