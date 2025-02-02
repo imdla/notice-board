@@ -35,6 +35,7 @@ export default function PostDetail() {
     <div>
       <h3>{post?.title}</h3>
       <p>{post?.content}</p>
+      <p>작성일 : {post?.createdAt.slice(0, 10)}</p>
       <hr />
       <div>
         tags :
@@ -43,15 +44,6 @@ export default function PostDetail() {
         })}
       </div>
       <hr />
-      {/* {post?.comments?.length ? (
-        <ol>
-          {post?.comments?.map((comment) => {
-            return <li key={`comment-${comment.id}`}>{comment.content}</li>;
-          })}
-        </ol>
-      ) : (
-        <div>댓글이 없습니다.</div>
-      )} */}
 
       <CommentForm postId={postId}></CommentForm>
     </div>

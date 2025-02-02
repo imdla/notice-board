@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import postApi from '../api/postsApi';
+import { useSelector } from 'react-redux';
 
 export default function CommentForm({ postId }) {
   const [comments, setComments] = useState({});
   const [formData, setFormData] = useState({ content: '' });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+
+  const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     async function fetchPost() {
@@ -33,7 +36,6 @@ export default function CommentForm({ postId }) {
     async function createComment() {
       try {
         const response = await postApi.createComment(postId, formData);
-        const data = response.data;
         setFormData({ content: '' });
       } catch (err) {
         console.log(err);
@@ -51,6 +53,10 @@ export default function CommentForm({ postId }) {
     });
   }
 
+  function handleClick() {
+    const updateComment = <form></form>
+  }
+
   return (
     <>
       {comments?.length ? (
@@ -62,6 +68,11 @@ export default function CommentForm({ postId }) {
                 <p>
                   {content} <span>{author}</span>{' '}
                   <span>{createdAt.slice(0, 10)}</span>
+                  {user.name == author ? (
+                    <button onClick={handleClick}>수정</button>
+                  ) : (
+                    ''
+                  )}
                 </p>
               </li>
             );
