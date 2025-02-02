@@ -43,7 +43,7 @@ export default function PostDetail() {
         })}
       </div>
       <hr />
-      {post?.comments?.length ? (
+      {/* {post?.comments?.length ? (
         <ol>
           {post?.comments?.map((comment) => {
             return <li key={`comment-${comment.id}`}>{comment.content}</li>;
@@ -51,7 +51,7 @@ export default function PostDetail() {
         </ol>
       ) : (
         <div>댓글이 없습니다.</div>
-      )}
+      )} */}
 
       <CommentForm postId={postId}></CommentForm>
     </div>
