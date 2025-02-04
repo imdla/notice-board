@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import postApi from '../api/postsApi';
 import { useSelector } from 'react-redux';
+import postApi from '../api/postsApi';
+import Comment from '../components/Comment';
 
 export default function CommentForm({ postId }) {
   const [comments, setComments] = useState({});
@@ -54,7 +55,11 @@ export default function CommentForm({ postId }) {
   }
 
   function handleClick() {
-    const updateComment = <form></form>
+    if (updateComment) {
+      setUpdateComment(false);
+    } else {
+      setUpdateComment(true);
+    }
   }
 
   return (
@@ -62,20 +67,8 @@ export default function CommentForm({ postId }) {
       {comments?.length ? (
         <ol>
           {comments?.map((comment) => {
-            const { id, content, author, createdAt } = comment;
-            return (
-              <li key={`comment-${id}`}>
-                <p>
-                  {content} <span>{author}</span>{' '}
-                  <span>{createdAt.slice(0, 10)}</span>
-                  {user.name == author ? (
-                    <button onClick={handleClick}>수정</button>
-                  ) : (
-                    ''
-                  )}
-                </p>
-              </li>
-            );
+            console.log(comment);
+            <Comment user={user} comment={comment}></Comment>;
           })}
         </ol>
       ) : (
