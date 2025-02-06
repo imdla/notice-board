@@ -54,14 +54,6 @@ export default function CommentForm({ postId }) {
     });
   }
 
-  function handleClick() {
-    if (updateComment) {
-      setUpdateComment(false);
-    } else {
-      setUpdateComment(true);
-    }
-  }
-
   return (
     <>
       {comments?.length ? (
