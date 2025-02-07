@@ -58,11 +58,9 @@ export default function CommentForm({ postId }) {
     <>
       {comments?.length ? (
         <ol>
-          {comments?.map((comment) => {
-            console.log(comment);
-            <Comment user={user} comment={comment}></Comment>;
-          })}
-        </ol>
+          
+            <Comment user={user} comments={comments}></Comment>;
+                  </ol>
       ) : (
         <div>댓글이 없습니다.</div>
       )}
