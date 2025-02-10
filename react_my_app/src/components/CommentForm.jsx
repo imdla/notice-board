@@ -4,7 +4,7 @@ import postApi from '../api/postsApi';
 import CommentList from './CommentList';
 
 export default function CommentForm({ postId }) {
-  const [comments, setComments] = useState({});
+  const [comments, setComments] = useState('');
   const [commentsList, setCommentsList] = useState('');
   const [formData, setFormData] = useState({ content: '' });
   const [loading, setLoading] = useState(true);
@@ -29,9 +29,7 @@ export default function CommentForm({ postId }) {
   useEffect(() => {
     comments?.length
       ? setCommentsList(
-          <ol>
-            <CommentList user={user} comments={comments}></CommentList>;
-          </ol>
+          <CommentList user={user} comments={comments}></CommentList>
         )
       : setCommentsList(<div>댓글이 없습니다.</div>);
   }, [comments]);

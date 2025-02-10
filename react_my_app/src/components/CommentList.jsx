@@ -15,12 +15,12 @@ export default function CommentList({ user, comments }) {
               <button>수정</button>
             </>
           ) : (
-            ''
+            '없음'
           )}
         </p>
       </li>
     );
   });
 
-  return { commentList };
+  return <ol>{commentList}</ol>;
 }
