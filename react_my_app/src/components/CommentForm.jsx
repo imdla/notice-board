@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import postApi from '../api/postsApi';
-import Comment from '../components/Comment';
+import CommentList from './CommentList';
 
 export default function CommentForm({ postId }) {
   const [comments, setComments] = useState({});
+  const [commentsList, setCommentsList] = useState('');
   const [formData, setFormData] = useState({ content: '' });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -24,6 +25,16 @@ export default function CommentForm({ postId }) {
     }
     fetchPost();
   }, [formData]);
+
+  useEffect(() => {
+    comments?.length
+      ? setCommentsList(
+          <ol>
+            <CommentList user={user} comments={comments}></CommentList>;
+          </ol>
+        )
+      : setCommentsList(<div>댓글이 없습니다.</div>);
+  }, [comments]);
 
   if (loading) return <div>로딩중...</div>;
 
@@ -56,14 +67,7 @@ export default function CommentForm({ postId }) {
 
   return (
     <>
-      {comments?.length ? (
-        <ol>
-          
-            <Comment user={user} comments={comments}></Comment>;
-                  </ol>
-      ) : (
-        <div>댓글이 없습니다.</div>
-      )}
+      {commentsList}
 
       <div>댓글 작성</div>
       <form onSubmit={handleSubmit}>
