@@ -1,23 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
+import CommentItem from './CommentItem';
 
 export default function CommentList({ user, comments }) {
-  const commentList = comments.map((comment) => {
-    const { id, content, author, createdAt } = comment;
 
+
+  const commentList = comments.map((comment) => {
     return (
-      <li key={`comment-${id}`}>
-        <p>
-          {content}
-          <span>{author}</span>
-          <span>{createdAt.slice(0, 10)}</span>
-          {user.name == author ? (
-            <>
-              <button>수정</button>
-            </>
-          ) : (
-            '없음'
-          )}
-        </p>
+      <li key={`comment-${comment.id}`}>
+        <CommentItem user={user} comment={comment}></CommentItem>
       </li>
     );
   });
