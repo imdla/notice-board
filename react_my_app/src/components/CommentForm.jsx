@@ -10,20 +10,21 @@ export default function CommentForm({ postId }) {
   const [error, setError] = useState({ message: '', status: null });
   const { user } = useSelector((state) => state.auth);
 
-  useEffect(() => {
-    async function fetchPost() {
-      try {
-        const response = await postApi.getComments(postId);
-        setComments(response.data.data);
-      } catch (err) {
-        setError({
-          message: err.message,
-          status: err.response?.status || 500,
-        });
-      } finally {
-        setLoading(false);
-      }
+  async function fetchPost() {
+    try {
+      const response = await postApi.getComments(postId);
+      setComments(response.data.data);
+    } catch (err) {
+      setError({
+        message: err.message,
+        status: err.response?.status || 500,
+      });
+    } finally {
+      setLoading(false);
     }
+  }
+
+  useEffect(() => {
     fetchPost();
   }, [formData]);
 
@@ -66,7 +67,11 @@ export default function CommentForm({ postId }) {
             comments.map((comment) => {
               return (
                 <li key={`comment-${comment.id}`}>
-                  <CommentItem user={user} comment={comment}></CommentItem>
+                  <CommentItem
+                    fetchPost={fetchPost}
+                    user={user}
+                    comment={comment}
+                  ></CommentItem>
                 </li>
               );
             })

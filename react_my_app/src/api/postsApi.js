@@ -56,6 +56,12 @@ const postApi = {
     const response = await api.get(`${ENDPOINT}/${postId}/comments`);
     return response;
   },
+
+  // PUT, 댓글 수정
+  updateComment: async (postId, commentId, formData) => {
+    const response = await api.put(`${ENDPOINT}/${postId}/comments/${commentId}`, formData);
+    return response;
+  },
 };
 
 export default postApi;
