@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import postApi from '../api/postsApi';
-import CommentList from './CommentList';
+import CommentItem from './CommentItem';
 
 export default function CommentForm({ postId }) {
-  const [comments, setComments] = useState('');
-  const [commentsList, setCommentsList] = useState('');
+  const [comments, setComments] = useState([]);
   const [formData, setFormData] = useState({ content: '' });
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-
+  const [error, setError] = useState({ message: '', status: null });
   const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
@@ -17,8 +15,12 @@ export default function CommentForm({ postId }) {
       try {
         const response = await postApi.getComments(postId);
         setComments(response.data.data);
+        console.log(response.data.data);
       } catch (err) {
-        setError(err.message);
+        setError({
+          message: err.message,
+          status: err.response?.status || 500,
+        });
       } finally {
         setLoading(false);
       }
@@ -26,18 +28,12 @@ export default function CommentForm({ postId }) {
     fetchPost();
   }, [formData]);
 
-  useEffect(() => {
-    comments?.length
-      ? setCommentsList(
-          <CommentList user={user} comments={comments}></CommentList>
-        )
-      : setCommentsList(<div>댓글이 없습니다.</div>);
-  }, [comments]);
+  if (loading) {
+    return <div>로딩 중입니다.</div>;
+  }
 
-  if (loading) return <div>로딩중...</div>;
-
-  if (error.status == 404) {
-    return <h3>{error}</h3>;
+  if (error.status == '404') {
+    return <div>{error.message}</div>;
   }
 
   function handleSubmit(e) {
@@ -65,8 +61,15 @@ export default function CommentForm({ postId }) {
 
   return (
     <>
-      {commentsList}
-
+      <ol>
+        {comments.map((comment) => {
+          return (
+            <li key={`comment-${comment.id}`}>
+              <CommentItem user={user} comment={comment}></CommentItem>
+            </li>
+          );
+        })}
+      </ol>
       <div>댓글 작성</div>
       <form onSubmit={handleSubmit}>
         <textarea
