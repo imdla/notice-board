@@ -15,7 +15,6 @@ export default function CommentForm({ postId }) {
       try {
         const response = await postApi.getComments(postId);
         setComments(response.data.data);
-        console.log(response.data.data);
       } catch (err) {
         setError({
           message: err.message,
@@ -61,26 +60,36 @@ export default function CommentForm({ postId }) {
 
   return (
     <>
-      <ol>
-        {comments.map((comment) => {
-          return (
-            <li key={`comment-${comment.id}`}>
-              <CommentItem user={user} comment={comment}></CommentItem>
-            </li>
-          );
-        })}
-      </ol>
+      <>
+        <ol>
+          {comments.length > 0 ? (
+            comments.map((comment) => {
+              return (
+                <li key={`comment-${comment.id}`}>
+                  <CommentItem user={user} comment={comment}></CommentItem>
+                </li>
+              );
+            })
+          ) : (
+            <div>댓글이 없습니다.</div>
+          )}
+        </ol>
+      </>
+
       <div>댓글 작성</div>
-      <form onSubmit={handleSubmit}>
-        <textarea
-          id="content"
-          name="content"
-          required
-          value={formData.content}
-          onChange={handleFormInput}
-        ></textarea>
-        <button>제출</button>
-      </form>
+
+      <>
+        <form onSubmit={handleSubmit}>
+          <textarea
+            id="content"
+            name="content"
+            required
+            value={formData.content}
+            onChange={handleFormInput}
+          ></textarea>
+          <button>제출</button>
+        </form>
+      </>
     </>
   );
 }
